@@ -4,6 +4,16 @@ import (
 	"testing"
 )
 
+func TestCardPublicStatus(t *testing.T) {
+	// Test enum values
+	if CardPublicStatusPrivate.String() != "非公開" {
+		t.Errorf("Expected 非公開, got %s", CardPublicStatusPrivate.String())
+	}
+	if CardPublicStatusPublic.String() != "公開" {
+		t.Errorf("Expected 公開, got %s", CardPublicStatusPublic.String())
+	}
+}
+
 func TestCard(t *testing.T) {
 	card1 := NewCard()
 	card2 := NewCard()
@@ -58,6 +68,18 @@ func TestPlayer(t *testing.T) {
 	player1.SetName("Updated Player 1")
 	if player1.Name() != "Updated Player 1" {
 		t.Error("Player name should be updated")
+	}
+}
+
+func TestTrumpCardSuit(t *testing.T) {
+	// Test label strings
+	if TrumpCardSuitClub.ToLabelString() != "クラブ" {
+		t.Errorf("Expected クラブ, got %s", TrumpCardSuitClub.ToLabelString())
+	}
+
+	// Test mark strings
+	if TrumpCardSuitClub.ToMarkString() != "♣" {
+		t.Errorf("Expected ♣, got %s", TrumpCardSuitClub.ToMarkString())
 	}
 }
 
