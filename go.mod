@@ -1,3 +1,5 @@
-module umefugo-server-go
+module github.com/rpaka/umefugo-server
 
-go 1.24
+go 1.24.4
+
+require github.com/google/uuid v1.6.0
