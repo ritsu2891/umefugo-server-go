@@ -23,11 +23,23 @@ umefugo-go/
 │   ├── daifugo_player_pass_status.go # プレイヤーパス状況enum
 │   ├── daifugo_trump_card_hierarchy.go # トランプカード強さ序列
 │   ├── daifugo_test.go        # テストファイル
-│   └── cardgroup/             # カードグループ関連
+│   └── cardgroup/             # カードグループ関連（完全移植済み）
 │       ├── daifugo_trump_card_group.go # トランプカードグループ
 │       ├── daifugo_trump_card_group_type.go # カードグループタイプinterface
 │       ├── daifugo_trump_card_group_type_class.go # カードグループ種別enum
-│       └── cardgroup_test.go  # テストファイル
+│       ├── [条件・タイプ実装クラス群]
+│       ├── cardgroup_test.go  # テストファイル
+│       ├── filter/            # フィルター機能（完全移植済み）
+│       │   ├── daifugo_trump_card_group_filter.go
+│       │   ├── daifugo_trump_card_group_filter_pair.go
+│       │   ├── [その他フィルタークラス群]
+│       │   └── filter_test.go
+│       └── candidatefilter/   # 候補フィルター機能（完全移植済み）
+│           ├── daifugo_trump_card_group_candidate_filter.go
+│           ├── daifugo_trump_card_group_candidate_filter_single.go
+│           ├── daifugo_trump_card_group_candidate_filter_pair.go
+│           ├── [その他候補フィルタークラス群]
+│           └── candidatefilter_test.go
 ├── go.mod                     # Goモジュール定義
 ├── go.sum                     # 依存関係チェックサム
 └── README.md                  # このファイル
@@ -90,6 +102,23 @@ umefugo-go/
 - **TrumpCardHierarchy**: 循環import回避用interface
   - **AdvancedTrumpCardHierarchy**: 拡張機能用interface
 
+##### Filterサブパッケージ（完全移植済み）
+
+- **DaifugoTrumpCardGroupFilter**: フィルター基底interface
+- **DaifugoTrumpCardGroupFilterBase**: フィルター基本実装
+- **DaifugoTrumpCardGroupFilterPair**: ペア型フィルター
+- **DaifugoTrumpCardGroupFilterCondition**: フィルター条件interface
+- **DaifugoTrumpCardGroupFilterConditionStatus**: 条件充足状況enum
+
+##### CandidateFilterサブパッケージ（完全移植済み）
+
+- **DaifugoTrumpCardGroupCandidateFilter**: 候補フィルターinterface
+- **DaifugoTrumpCardGroupCandidateFilterBase**: 候補フィルター基本実装
+- **DaifugoTrumpCardGroupCandidateFilterSingle**: 単体カード候補フィルター
+- **DaifugoTrumpCardGroupCandidateFilterPair**: ペアカード候補フィルター
+- **DaifugoTrumpCardGroupCandidateFilterCondition**: 候補フィルター条件interface
+- **ConditionSatisfyStatus**: 条件満足状況enum
+
 ## 依存関係
 
 - `github.com/google/uuid` - UUID生成用
@@ -122,8 +151,6 @@ go test ./common -v
 3. **例外 → エラー**: C#の例外をGoのerrorインターフェースで実装
 4. **static → パッケージレベル関数**: C#のstaticメソッドをGoのパッケージレベル関数で実装
 5. **namespace → package**: C#のnamespaceをGoのpackageで実装
-
-## 課題
 
 ### 循環Import
 - **問題**: `daifugo/cardgroup`が`daifugo`の`DaifugoTrumpCardHierarchy`を参照

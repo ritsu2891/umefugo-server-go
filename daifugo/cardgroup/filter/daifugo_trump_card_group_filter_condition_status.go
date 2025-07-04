@@ -1,0 +1,13 @@
+package filter
+
+// DaifugoTrumpCardGroupFilterConditionStatus カードグループ条件制約の制約充足状況
+type DaifugoTrumpCardGroupFilterConditionStatus int
+
+const (
+	// DaifugoTrumpCardGroupFilterConditionStatusDefault 不定
+	DaifugoTrumpCardGroupFilterConditionStatusDefault DaifugoTrumpCardGroupFilterConditionStatus = iota
+	// DaifugoTrumpCardGroupFilterConditionStatusSatisfied 充足
+	DaifugoTrumpCardGroupFilterConditionStatusSatisfied
+	// DaifugoTrumpCardGroupFilterConditionStatusUnSatisfied 不足
+	DaifugoTrumpCardGroupFilterConditionStatusUnSatisfied
+)
